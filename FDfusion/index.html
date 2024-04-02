@@ -89,7 +89,7 @@
             <img class="img-fluid img-small" src="image/pipeline/pipe.png" style="margin-bottom: 20px;" > 
             <!-- <br><br> -->
             <p class="text-justify text-indent">
-              Our goal is to optimize a 3D model represented by NeRF, given
+              The 3D reconstruction pipeline of our method. Our goal is to optimize a 3D model represented by NeRF, given
               sparse input views. First, we minimize a reconstruction loss  \( \mathcal{L}_{\text{Recon}} \) between the rendered images and the real images under
               the input viewpoints. Then, given input images and a sampled novel view, we use a feature extractor to obtain a coarse
               RGB rendering(denoted as EFT image). We minimize a color loss  \( \mathcal{L}_{\text{Color}} \) between the image rendered by NeRF and the
@@ -97,35 +97,98 @@
               the EFT image as the image condition and text prompt as text condition, then we can have a generated image. Finally, we
               compute the CLIP features of the generated image and input images. When their similarity exceeds a threshold, we turn on
               the semantic switch and minimize a distillation loss  \( \mathcal{L}_{\text{Distill}} \) between the rendered image and the generated image.
+            </p>
+            <p class="text-justify"></p>
         </div>
       </div>
     </div>
   </section>
   <br>
 
-    <!-- citing -->
+  
+
+
+  <!-- diffusion results -->
+  <section>
     <div class="container">
-      <div class="row ">
-        <div class="col-12">
-            <h3>Citation</h3>
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Image Synthesized</h3>
             <hr style="margin-top:0px">
-                <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
-  <code>@misc{gao2024mcnerf,
-        title={MC-NeRF: Multi-Camera Neural Radiance Fields for Multi-Camera Image Acquisition Systems}, 
-        author={Yu Gao and Lutong Su and Hao Liang and Yufeng Yue and Yi Yang and Mengyin Fu},
-        year={2024},
-        eprint={2309.07846},
-        archivePrefix={arXiv},
-        primaryClass={cs.CV}
-  }</code></pre>
-            <hr>
+            <img class="img-fluid img-small" src="image/pipeline/pipe.png" style="margin-bottom: 20px;" > 
+            <!-- <br><br> -->
+
         </div>
       </div>
     </div>
-  
-    <footer class="text-center" style="margin-bottom:10px">
-        Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
-    </footer>
-  
-  </body>
-  </html>
+  </section>
+  <br>
+
+
+
+
+  <!-- Reconstrction results -->
+  <section>
+    <div class="container">
+      <div>
+        <div class="row">
+          <div class="col-12 text-center">
+              <h3>Reconstruction Results</h3>
+              <hr style="margin-top:0px">
+              <h4 style="margin-top:20px; margin-bottom:20px; color:#717980">6 input views</h4>
+              <!-- 第一行的两组图片 -->
+              <div class="row">
+                <!-- 第一组图片 -->
+                <div class="col-md-6 p-3">
+                    <div class="image-group">
+                        <img src="image/6views/cake/cake0.png" alt="Image 1" class="img-fluid" style="max-width: 256px; margin-bottom: 15px;">
+                        <img src="image/6views/cake/cake1.png" alt="Image 2" class="img-fluid" style="max-width: 256px; margin-bottom: 15px;">
+                        <img src="image/6views/cake/cake2.png" alt="Image 3" class="img-fluid" style="max-width: 256px; margin-bottom: 15px;">
+                        <img src="image/6views/cake/cake_6.gif" alt="GIF 1" class="img-fluid" style="max-width: 512px; margin-bottom: 15px;">
+                        <p>cake</p>
+                    </div>
+                </div>
+                <!-- 第二组图片 -->
+                <div class="col-md-6 p-3">
+                  <div class="image-group">
+                    <img src="image/6views/suitcase/suitcase0.png" alt="Image 1" class="img-fluid" style="max-width: 256px; margin-bottom: 15px;">
+                    <img src="image/6views/suitcase/suitcase1.png" alt="Image 2" class="img-fluid" style="max-width: 256px; margin-bottom: 15px;">
+                    <img src="image/6views/suitcase/suitcase2.png" alt="Image 3" class="img-fluid" style="max-width: 256px; margin-bottom: 15px;">
+                    <img src="image/6views/suitcase/suitcase_6.gif" alt="GIF 1" class="img-fluid" style="max-width: 512px; margin-bottom: 15px;">
+                      <p>suitcase</p>
+                  </div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@misc{gao2024mcnerf,
+      title={MC-NeRF: Multi-Camera Neural Radiance Fields for Multi-Camera Image Acquisition Systems}, 
+      author={Yu Gao and Lutong Su and Hao Liang and Yufeng Yue and Yi Yang and Mengyin Fu},
+      year={2024},
+      eprint={2309.07846},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}</code></pre>
+          <hr>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center" style="margin-bottom:10px">
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
+  </footer>
+
+</body>
+</html>
