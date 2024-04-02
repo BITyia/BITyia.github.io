@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8"> <!-- 声明文档的字符集 -->
     <meta charset="UTF-8">
-    <title>MathJax Example</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
@@ -87,17 +86,17 @@
         <div class="col-12 text-center">
             <h3>Overview</h3>
             <hr style="margin-top:0px">
-            <img class="img-fluid img-small" src="image/pipeline/pipe.png">
+            <img class="img-fluid img-small" src="image/pipeline/pipe.png" style="margin-bottom: 20px;" > 
             <!-- <br><br> -->
             <p class="text-justify text-indent">
               Our goal is to optimize a 3D model represented by NeRF, given
-              sparse input views. First, we minimize a reconstruction loss $$\mathcal{L}_{\text{Recon}}$$ between the rendered images and the real images under
+              sparse input views. First, we minimize a reconstruction loss  \( \mathcal{L}_{\text{Recon}} \) between the rendered images and the real images under
               the input viewpoints. Then, given input images and a sampled novel view, we use a feature extractor to obtain a coarse
-              RGB rendering(denoted as EFT image). We minimize a color loss LColor between the image rendered by NeRF and the
+              RGB rendering(denoted as EFT image). We minimize a color loss  \( \mathcal{L}_{\text{Color}} \) between the image rendered by NeRF and the
               EFT image under the sampled novel viewpoint. We take the rendered image as the input for the diffusion model, along with
               the EFT image as the image condition and text prompt as text condition, then we can have a generated image. Finally, we
               compute the CLIP features of the generated image and input images. When their similarity exceeds a threshold, we turn on
-              the semantic switch and minimize a distillation loss LDistill between the rendered image and the generated image.
+              the semantic switch and minimize a distillation loss  \( \mathcal{L}_{\text{Distill}} \) between the rendered image and the generated image.
         </div>
       </div>
     </div>
