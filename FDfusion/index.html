@@ -2,6 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8"> <!-- 声明文档的字符集 -->
+    <meta charset="UTF-8">
+    <title>MathJax Example</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
     <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- 设置网页视口的元数据标签 -->
     <title>FDfusion</title>
@@ -11,7 +15,7 @@
     <style>
       /* 添加自定义样式 */
       .img-small {
-          width: 80%; /* 或你希望的任何尺寸 */
+          width: 90%; /* 或你希望的任何尺寸 */
       }
       .text-indent {
           text-indent: 2em; /* 或根据需要调整 */
@@ -63,7 +67,7 @@
         <div class="col-12 text-center">
           <h3>Abstract</h3>
             <hr style="margin-top:0px">
-          <p class="text-justify">  3D reconstruction methods such as Neural Radiance Fields (NeRFs) are capable of optimizing high-quality 3D scene representation from images. However, NeRF is limited by the requirement for a large number of multi-view images, making its application to real-world scenarios challenging. 
+          <p class="text-justify text-indent">  3D reconstruction methods such as Neural Radiance Fields (NeRFs) are capable of optimizing high-quality 3D scene representation from images. However, NeRF is limited by the requirement for a large number of multi-view images, making its application to real-world scenarios challenging. 
             In this work, we propose a method that can reconstruct real-world scenes from a few input images and a simple text prompt. 
              Specifically, we fine-tune a pretrained diffusion model to constrain its powerful priors to the visual inputs and generate 3D-aware images, leveraging the coarse renderings obtained from input images as the image condition, along with the text prompt as the text condition. Our fine-tuning method saves a significant amount of training time and GPU memory usage while also generating credible results.
              Moreover, to enable our method to have self-evaluation capabilities, we design a semantic switch to filter out generated images that do not match real scenes, ensuring that only informative priors from the fine-tuned diffusion model are distilled into the 3D model. The semantic switch we designed can be used as a plug-in and improve performance by 13%.
@@ -86,8 +90,14 @@
             <img class="img-fluid img-small" src="image/pipeline/pipe.png">
             <!-- <br><br> -->
             <p class="text-justify text-indent">
-              Overview of the proposed method. First, based on the designed process (as shown in Fig. 5), we obtain two sets of auxiliary images containing AprilTags, named P ack1 and P ack2. These image sets provide 3D coordinates in the world coordinate system and feature point coordinates in the images, which are utilized to establish reprojection loss functions. Second, the camera’s intrinsic and extrinsic parameters, which are constrained by the reprojection loss function, are used to generate sampling points. These points are then fed into a Multilayer Perceptron (MLP) that employs BARF-based progressive encoding for subsequent training.
-            </p>
+              Our goal is to optimize a 3D model represented by NeRF, given
+              sparse input views. First, we minimize a reconstruction loss $$\mathcal{L}_{\text{Recon}}$$ between the rendered images and the real images under
+              the input viewpoints. Then, given input images and a sampled novel view, we use a feature extractor to obtain a coarse
+              RGB rendering(denoted as EFT image). We minimize a color loss LColor between the image rendered by NeRF and the
+              EFT image under the sampled novel viewpoint. We take the rendered image as the input for the diffusion model, along with
+              the EFT image as the image condition and text prompt as text condition, then we can have a generated image. Finally, we
+              compute the CLIP features of the generated image and input images. When their similarity exceeds a threshold, we turn on
+              the semantic switch and minimize a distillation loss LDistill between the rendered image and the generated image.
         </div>
       </div>
     </div>
