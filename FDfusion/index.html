@@ -109,73 +109,67 @@
   <style>
     .diff-img-fluid {
       width: auto; /* 自适应宽度 */
-      height: 100px; /* 统一高度 */
+      height: 250px; /* 统一高度 */
       margin: 20px; /* 图片间的间隔 */
+    }
+    .caption {
+      width: 100%;
+    }
+    .caption td {
+      width: 25%;
+    }
+    ul.diffusion-list {
+      list-style-type: none; 
+      padding: 0; 
+      display: flex; 
+      flex-wrap: wrap; 
+      justify-content: flex-start; /* 左对齐 */
+      width: 100%; /* 容器宽度与表格一致 */
+    }
+    ul.diffusion-list li {
+      width: 25%; /* 每个列表项的宽度与表格列宽度一致 */
+      margin: 20px 0; /* 调整为仅上下有外边距 */
     }
   </style>
 
   <!-- diffusion results -->
   <section>
-    <div class="container">
-      <div>
-        <div class="row">
-          <div class="col-12 text-center">
-            <h3>Image Synthesized</h3>
-            <hr style="margin-top:0px">
-            <table class="caption" style="width: 100%;">
-              <tr>
-                  <td style="width: 25%">Diffusion Input</td>
-                  <td style="width: 25%">Before Fine-tune</td>
-                  <td style="width: 25%">After Fine-tune</td>
-                  <td style="width: 25%">Ground Truth</td>
-              </tr>
-            </table>
-              <ul style="list-style-type: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: space-between;">
-                <li>
-                  <img class="diff-img-fluid" src="image/diffusion/hydrant/d_i.png">
-                </li>
-                <li>
-                  <img class="diff-img-fluid" src="image/diffusion/hydrant/b_f.png">
-                </li>
-                <li>
-                  <img class="diff-img-fluid" src="image/diffusion/hydrant/a_f.png">
-                </li>
-                <li>
-                  <img class="diff-img-fluid" src="image/diffusion/hydrant/g_t.png">
-                </li>
-              </ul>
-              <ul style="list-style-type: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: space-between;">
-                <li>
-                  <img class="diff-img-fluid" src="image/diffusion/plant/d_i.png">
-                </li>
-                <li>
-                  <img class="diff-img-fluid" src="image/diffusion/plant/b_f.png">
-                </li>
-                <li>
-                  <img class="diff-img-fluid" src="image/diffusion/plant/a_f.png">
-                </li>
-                <li>
-                  <img class="diff-img-fluid" src="image/diffusion/plant/g_t.png">
-                </li>
-              </ul>
-              <ul style="list-style-type: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: space-between;">
-                <li>
-                  <img class="diff-img-fluid" src="image/diffusion/vase/d_i.png">
-                </li>
-                <li>
-                  <img class="diff-img-fluid" src="image/diffusion/vase/b_f.png">
-                </li>
-                <li>
-                  <img class="diff-img-fluid" src="image/diffusion/vase/a_f.png">
-                </li>
-                <li>
-                  <img class="diff-img-fluid" src="image/diffusion/vase/g_t.png">
-                </li>
-              </ul>
-          </div>
+  <div class="container">
+    <div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Image Synthesized</h3>
+          <hr style="margin-top:0px">
+          <table class="caption">
+            <tr>
+              <td>Diffusion Input</td>
+              <td>Before Fine-tune</td>
+              <td>After Fine-tune</td>
+              <td>Ground Truth</td>
+            </tr>
+          </table>
+          <ul class="diffusion-list">
+            <li><img class="diff-img-fluid" src="image/diffusion/hydrant/d_i.png"></li>
+            <li><img class="diff-img-fluid" src="image/diffusion/hydrant/b_f.png"></li>
+            <li><img class="diff-img-fluid" src="image/diffusion/hydrant/a_f.png"></li>
+            <li><img class="diff-img-fluid" src="image/diffusion/hydrant/g_t.png"></li>
+          </ul>
+          <ul class="diffusion-list">
+            <li><img class="diff-img-fluid" src="image/diffusion/plant/d_i.png"></li>
+            <li><img class="diff-img-fluid" src="image/diffusion/plant/b_f.png"></li>
+            <li><img class="diff-img-fluid" src="image/diffusion/plant/a_f.png"></li>
+            <li><img class="diff-img-fluid" src="image/diffusion/plant/g_t.png"></li>
+          </ul>
+          <ul class="diffusion-list">
+            <li><img class="diff-img-fluid" src="image/diffusion/vase/d_i.png"></li>
+            <li><img class="diff-img-fluid" src="image/diffusion/vase/b_f.png"></li>
+            <li><img class="diff-img-fluid" src="image/diffusion/vase/a_f.png"></li>
+            <li><img class="diff-img-fluid" src="image/diffusion/vase/g_t.png"></li>
+          </ul>
         </div>
       </div>
     </div>
+  </div>
 </section>
 <br>
 
