@@ -106,7 +106,13 @@
   <br>
 
   
-
+  <style>
+    .diff-img-fluid {
+      width: auto; /* 自适应宽度 */
+      height: 200px; /* 统一高度 */
+      margin: 20px; /* 图片间的间隔 */
+    }
+  </style>
 
   <!-- diffusion results -->
   <section>
@@ -114,55 +120,55 @@
       <div>
         <div class="row">
           <div class="col-12 text-center">
-              <h3>Image Synthesized</h3>
-              <hr style="margin-top:0px">
-              <table class="caption" style="width: 100%;">
-                <tr>
-                    <td style="width: 25%">Diffusion Input</td>
-                    <td style="width: 25%">Before Fine-tune</td>
-                    <td style="width: 25%">After Fine-tune</td>
-                    <td style="width: 25%">Ground Truth</td>
-                </tr>
-              </table>
-              <ul style="list-style-type: none; padding: 0; margin: 10px 0; display: flex; justify-content: space-between;">
-                <li style="margin: 10px;">
+            <h3>Image Synthesized</h3>
+            <hr style="margin-top:0px">
+            <table class="caption" style="width: 100%;">
+              <tr>
+                  <td style="width: 25%">Diffusion Input</td>
+                  <td style="width: 25%">Before Fine-tune</td>
+                  <td style="width: 25%">After Fine-tune</td>
+                  <td style="width: 25%">Ground Truth</td>
+              </tr>
+            </table>
+              <ul style="list-style-type: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: space-between;">
+                <li>
                   <img class="img-fluid" src="image/diffusion/hydrant/d_i.png">
                 </li>
-                <li style="margin: 10px;">
+                <li>
                   <img class="img-fluid" src="image/diffusion/hydrant/b_f.png">
                 </li>
-                <li style="margin: 10px;">
+                <li>
                   <img class="img-fluid" src="image/diffusion/hydrant/a_f.png">
                 </li>
-                <li style="margin: 10px;">
+                <li>
                   <img class="img-fluid" src="image/diffusion/hydrant/g_t.png">
                 </li>
               </ul>
-              <ul style="list-style-type: none; padding: 0; margin: 10px 0; display: flex; justify-content: space-between;">
-                <li style="margin: 10px;">
+              <ul style="list-style-type: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: space-between;">
+                <li>
                   <img class="img-fluid" src="image/diffusion/plant/d_i.png">
                 </li>
-                <li style="margin: 10px;">
+                <li>
                   <img class="img-fluid" src="image/diffusion/plant/b_f.png">
                 </li>
-                <li style="margin: 10px;">
+                <li>
                   <img class="img-fluid" src="image/diffusion/plant/a_f.png">
                 </li>
-                <li style="margin: 10px;">
+                <li>
                   <img class="img-fluid" src="image/diffusion/plant/g_t.png">
                 </li>
               </ul>
-              <ul style="list-style-type: none; padding: 0; margin: 10px 0; display: flex; justify-content: space-between;">
-                <li style="margin: 10px;">
+              <ul style="list-style-type: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: space-between;">
+                <li>
                   <img class="img-fluid" src="image/diffusion/vase/d_i.png">
                 </li>
-                <li style="margin: 10px;">
+                <li>
                   <img class="img-fluid" src="image/diffusion/vase/b_f.png">
                 </li>
-                <li style="margin: 10px;">
+                <li>
                   <img class="img-fluid" src="image/diffusion/vase/a_f.png">
                 </li>
-                <li style="margin: 10px;">
+                <li>
                   <img class="img-fluid" src="image/diffusion/vase/g_t.png">
                 </li>
               </ul>
@@ -172,6 +178,7 @@
     </div>
 </section>
 <br>
+
 
 
 
