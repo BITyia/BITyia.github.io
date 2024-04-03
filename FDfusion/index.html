@@ -111,26 +111,80 @@
   <!-- diffusion results -->
   <section>
     <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-            <h3>Image Synthesized</h3>
-            <hr style="margin-top:0px">
-            <img class="img-fluid img-small" src="image/diffusion/pic1.png" style="margin-bottom: 20px;" > 
-            <!-- <br><br> -->
-
+      <div>
+        <div class="row">
+          <div class="col-12 text-center">
+              <h3>Image Synthesized</h3>
+              <hr style="margin-top:0px">
+              <h4 style="margin-top:20px; margin-bottom:20px; color:#717980">Random pose initialization</h4>
+              <h5 style="margin-top:10px; margin-bottom:10px; color:#1183e7">L2G-NeRF</h5>
+              <table class="caption" style="width: 100%;">
+                <tr>
+                    <td style="width: 25%">Diffusion Input</td>
+                    <td style="width: 25%">Before Fine-tune</td>
+                    <td style="width: 25%">After Fine-tune</td>
+                    <td style="width: 25%">Ground Truth</td>
+                </tr>
+              </table>
+              <ul>
+                <li>
+                  <img class="img-fluid" src="image/diffusion/hydrant/d_i.png">
+                </li>
+                <li>
+                  <img class="img-fluid" src="image/diffusion/hydrant/b_f.png">
+                </li>
+                <li>
+                  <img class="img-fluid" src="image/diffusion/hydrant/a_f.png">
+                </li>
+                <li>
+                  <img class="img-fluid" src="image/diffusion/hydrant/g_t.png">
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  <img class="img-fluid" src="image/plant/hydrant/d_i.png">
+                </li>
+                <li>
+                  <img class="img-fluid" src="image/plant/hydrant/b_f.png">
+                </li>
+                <li>
+                  <img class="img-fluid" src="image/plant/hydrant/a_f.png">
+                </li>
+                <li>
+                  <img class="img-fluid" src="image/plant/hydrant/g_t.png">
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  <img class="img-fluid" src="image/vase/hydrant/d_i.png">
+                </li>
+                <li>
+                  <img class="img-fluid" src="image/vase/hydrant/b_f.png">
+                </li>
+                <li>
+                  <img class="img-fluid" src="image/vase/hydrant/a_f.png">
+                </li>
+                <li>
+                  <img class="img-fluid" src="image/vase/hydrant/g_t.png">
+                </li>
+              </ul>
+          </div>
         </div>
       </div>
     </div>
   </section>
   <br>
 
+
+
+
 <style>
-  .img-png {
+  .Recon-img-png {
     height: 110px; /* Set a fixed height that is appropriate for your layout */
     width: auto; /* Ensure the width adjusts to maintain the aspect ratio */
   }
 
-  .img-gif {
+  .Recon-img-gif {
     height: 110px; /* Match the height of the PNG images */
     width: auto; /* Allow the width to scale proportionally */
   }
@@ -148,28 +202,28 @@
             <h4 style="margin-top:20px; margin-bottom:20px; color:#717980">6 input views</h4>
             <ul style="list-style-type: none; padding: 0; margin: 0 auto; width: 100%; display: flex; justify-content: space-around; flex-wrap: nowrap;">
               <li style="flex: 1; max-width: 10%;">
-                <img class="img-png" src="image/6views/cake/cake0.png">
+                <img class="Recon-img-png" src="image/6views/cake/cake0.png">
               </li>
               <li style="flex: 1; max-width: 10%;">
-                <img class="img-png" src="image/6views/cake/cake1.png">
+                <img class="Recon-img-png" src="image/6views/cake/cake1.png">
               </li>
               <li style="flex: 1; max-width: 10%;">
-                <img class="img-png" src="image/6views/cake/cake2.png">
+                <img class="Recon-img-png" src="image/6views/cake/cake2.png">
               </li>
               <li style="flex: 1; max-width: 20%; margin-right: 20px;">
-                <img class="img-gif" src="image/6views/cake/cake_6.gif">
+                <img class="Recon-img-gif" src="image/6views/cake/cake_6.gif">
               </li>
               <li style="flex: 1; max-width: 10%;">
-                <img class="img-png" src="image/6views/suitcase/suitcase0.png">
+                <img class="Recon-img-png" src="image/6views/suitcase/suitcase0.png">
               </li>
               <li style="flex: 1; max-width: 10%;">
-                <img class="img-png" src="image/6views/suitcase/suitcase1.png">
+                <img class="Recon-img-png" src="image/6views/suitcase/suitcase1.png">
               </li>
               <li style="flex: 1; max-width: 10%;">
-                <img class="img-png" src="image/6views/suitcase/suitcase2.png">
+                <img class="Recon-img-png" src="image/6views/suitcase/suitcase2.png">
               </li>
               <li style="flex: 1; max-width: 20%;">
-                <img class="img-gif" src="image/6views/suitcase/suitcase_6.gif">
+                <img class="Recon-img-gif" src="image/6views/suitcase/suitcase_6.gif">
               </li>
             </ul>
             <ul style="list-style-type: none; padding: 0; margin: 0 auto; width: 100%; display: flex; justify-content: space-around; flex-wrap: nowrap;">
@@ -207,12 +261,12 @@
 
 
   <!-- citing -->
-  <div class="container">
+  <!-- <div class="container">
     <div class="row ">
       <div class="col-12">
           <h3>Citation</h3>
           <hr style="margin-top:0px">
-              <!-- <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
 <code>@misc{gao2024mcnerf,
       title={MC-NeRF: Multi-Camera Neural Radiance Fields for Multi-Camera Image Acquisition Systems}, 
       author={Yu Gao and Lutong Su and Hao Liang and Yufeng Yue and Yi Yang and Mengyin Fu},
@@ -220,11 +274,11 @@
       eprint={2309.07846},
       archivePrefix={arXiv},
       primaryClass={cs.CV}
-}</code></pre> -->
+}</code></pre>
           <hr>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <footer class="text-center" style="margin-bottom:10px">
       Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
