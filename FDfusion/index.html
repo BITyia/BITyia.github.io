@@ -124,17 +124,19 @@
     .caption td:nth-child(3)::after { /* 为“Image Condition”列添加虚线 */
       content: "";
       position: absolute;
-      right: 0px;
+      right: 2px;
       top: 0px; /* 顶部对齐调整 */
       height: calc(3 * 208px + 3 * 20px); /* 虚线高度与图片对齐 */
       border-right: 2px dashed #ccc; /* 虚线样式 */
     }
     .text-prompt {
-      display: flex; /* 使用flex布局使文字垂直居中 */
-      align-items: center; /* 垂直居中 */
-      justify-content: center; /* 水平居中 */
-      height: 173px; /* 设置高度与图片一致 */
-      margin: 4px; /* 设置外边距与图片一致 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 208px;
+      margin: 4px;
+      font-family: 'Times New Roman', Times, serif; /* 设置字体类型 */
+      font-size: 16px; /* 设置字体大小（如果需要的话） */
     }
     ul.diffusion-list {
       list-style-type: none; 
