@@ -109,25 +109,32 @@
   <style>
     .diff-img-fluid {
       width: auto; /* 自适应宽度 */
-      height: 208px; /* 统一高度 */
+      height: 173px; /* 统一高度 */
       margin: 4px; /* 图片间的间隔 */
     }
     .caption {
       width: 100%;
     }
     .caption td {
-      width: 20%;
+      width: 16.6%;
     }
-    .caption td:nth-child(2) { /* 定位到“Image Condition”所在的<td> */
+    .caption td:nth-child(3) { /* 定位到“Image Condition”所在的<td> */
       position: relative;
     }
-    .caption td:nth-child(2)::after { /* 为“Image Condition”列添加虚线 */
+    .caption td:nth-child(3)::after { /* 为“Image Condition”列添加虚线 */
       content: "";
       position: absolute;
       right: 0px;
       top: 0px; /* 顶部对齐调整 */
-      height: calc(3 * 208px + 2 * 20px); /* 虚线高度与图片对齐 */
+      height: calc(3 * 208px + 3 * 20px); /* 虚线高度与图片对齐 */
       border-right: 2px dashed #ccc; /* 虚线样式 */
+    }
+    .text-prompt {
+      display: flex; /* 使用flex布局使文字垂直居中 */
+      align-items: center; /* 垂直居中 */
+      justify-content: center; /* 水平居中 */
+      height: 173px; /* 设置高度与图片一致 */
+      margin: 4px; /* 设置外边距与图片一致 */
     }
     ul.diffusion-list {
       list-style-type: none; 
@@ -138,7 +145,7 @@
       width: 100%; /* 容器宽度与表格一致 */
     }
     ul.diffusion-list li {
-      width: 20%; /* 每个列表项的宽度与表格列宽度一致 */
+      width: 16.6%; /* 每个列表项的宽度与表格列宽度一致 */
       margin: 0 0; /* 调整为仅上下有外边距 */
     }
   </style>
@@ -154,6 +161,7 @@
           <table class="caption">
             <tr>
               <td>Diffusion Input</td>
+              <td>Text Prompt</td>
               <td>Image Condition</td>
               <td>Before Fine-tuning</td>
               <td>After Fine-tuning</td>
@@ -162,6 +170,7 @@
           </table>
           <ul class="diffusion-list">
             <li><img class="diff-img-fluid" src="image/diffusion/hydrant/d_i.png"></li>
+            <li class="text-prompt">A high resolution hydrant</li>
             <li><img class="diff-img-fluid" src="image/diffusion/hydrant/i_c.png"></li>
             <li><img class="diff-img-fluid" src="image/diffusion/hydrant/b_f.png"></li>
             <li><img class="diff-img-fluid" src="image/diffusion/hydrant/a_f.png"></li>
@@ -169,6 +178,7 @@
           </ul>
           <ul class="diffusion-list">
             <li><img class="diff-img-fluid" src="image/diffusion/plant/d_i.png"></li>
+            <li class="text-prompt">A high resolution plant</li>
             <li><img class="diff-img-fluid" src="image/diffusion/plant/i_c.png"></li>
             <li><img class="diff-img-fluid" src="image/diffusion/plant/b_f.png"></li>
             <li><img class="diff-img-fluid" src="image/diffusion/plant/a_f.png"></li>
@@ -176,6 +186,7 @@
           </ul>
           <ul class="diffusion-list">
             <li><img class="diff-img-fluid" src="image/diffusion/vase/d_i.png"></li>
+            <li class="text-prompt">A high resolution vase</li>
             <li><img class="diff-img-fluid" src="image/diffusion/vase/i_c.png"></li>
             <li><img class="diff-img-fluid" src="image/diffusion/vase/b_f.png"></li>
             <li><img class="diff-img-fluid" src="image/diffusion/vase/a_f.png"></li>
