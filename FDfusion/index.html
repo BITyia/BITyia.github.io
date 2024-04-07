@@ -118,6 +118,14 @@
     .caption td {
       width: 20%;
     }
+    .caption td:nth-child(2)::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: calc(3 * 208px + 2 * 4px); /* 3张图片高度加上2个间距 */
+      border-right: 2px dashed #ccc;
+    }
     ul.diffusion-list {
       list-style-type: none; 
       padding: 0; 
