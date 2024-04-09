@@ -126,16 +126,16 @@
       align-items: center;
       justify-content: center;
     }
-    .caption {
+    .diff-caption {
       width: 100%;
     }
-    .caption td {
+    .diff-caption td {
       width: 16.6%;
     }
-    .caption td:nth-child(3) { /* 定位到“Image Condition”所在的<td> */
+    .diff-caption td:nth-child(3) { /* 定位到“Image Condition”所在的<td> */
       position: relative;
     }
-    .caption td:nth-child(3)::after { /* 为“Image Condition”列添加虚线 */
+    .diff-caption td:nth-child(3)::after { /* 为“Image Condition”列添加虚线 */
       content: "";
       position: absolute;
       right: 2.5px;
@@ -174,7 +174,7 @@
         <div class="col-12 text-center">
           <h3>Image Synthesized</h3>
           <hr style="margin-top:0px">
-          <table class="caption">
+          <table class="diff-caption">
             <tr>
               <td>Diffusion Input</td>
               <td>Text Prompt</td>
@@ -389,8 +389,8 @@
             </div>
         </div>
     </div>
-</section>
-  <br>
+  </section>
+<br>
 
   <!-- citing -->
   <!-- <div class="container">
