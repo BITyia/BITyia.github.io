@@ -17,7 +17,10 @@
           width: 90%; /* 或你希望的任何尺寸 */
       }
       .img-big {
-          width: 100%; /* 或你希望的任何尺寸 */
+        width: auto; /* 使图片保持原始宽度 */
+        max-width: 100%; /* 确保图片不会超过其容器的宽度 */
+        display: block; /* 使图片独占一行 */
+        margin: 0 auto; /* 图片居中显示 */
       }
       .img-large {
           width: 95%; /* 或你希望的任何尺寸 */
@@ -352,51 +355,41 @@
   <!-- Comparison -->
   <section>
     <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-            <h3 style="margin-top:60px;">Reconstruction Comparison</h3>
-            <hr style="margin-top:0px">
-            <h4 style="margin-top:20px; margin-bottom:20px; color:#717980">3 input views</h4>
-            <table class="caption" style="width: 100%;">
-              <tr>
-                  <td style="width: 14.25%">RegNeRF</td>
-                  <td style="width: 14.25%">FreeNeRF</td>
-                  <td style="width: 14.25%">FlipNeRF</td>
-                  <td style="width: 14.25%">DiffusioNeRF</td>
-                  <td style="width: 14.25%">SparseFusion</td>
-                  <td style="width: 14.25%">Ours</td>
-                  <td style="width: 14.25%">Ground Truth</td>
-              </tr>
-            </table>
-            <ul>
-              <li>
-                <img class="img-big" src="image/compare/3_cake.png">
-              </li>
-            <ul>
-            <ul>
-              <li>
-                <img class="img-big" src="image/compare/3_hydrant.png">
-              </li>
-            <ul>
-            <ul>
-              <li>
-                <img class="img-big" src="image/compare/3_suitcase.png">
-              </li>
-            <ul>
-              <li>
-                <img class="img-big" src="image/compare/3_toytrain.png">
-              </li>
-            <ul>
-            <ul>   
-              <li>
-                <img class="img-big" src="image/compare/3_plant.png">
-              </li>
-            </ul>
-            <!-- <br><br> -->
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 style="margin-top:60px;">Reconstruction Comparison</h3>
+                <hr style="margin-top:0px">
+                <h4 style="margin-top:20px; margin-bottom:20px; color:#717980">3 input views</h4>
+                <table class="caption" style="width: 100%;">
+                    <tr>
+                        <td style="width: 14.25%">RegNeRF</td>
+                        <td style="width: 14.25%">FreeNeRF</td>
+                        <td style="width: 14.25%">FlipNeRF</td>
+                        <td style="width: 14.25%">DiffusioNeRF</td>
+                        <td style="width: 14.25%">SparseFusion</td>
+                        <td style="width: 14.25%">Ours</td>
+                        <td style="width: 14.25%">Ground Truth</td>
+                    </tr>
+                </table>
+                <ul>
+                    <li><img class="img-big" src="image/compare/3_cake.png"></li>
+                </ul>
+                <ul>
+                    <li><img class="img-big" src="image/compare/3_hydrant.png"></li>
+                </ul>
+                <ul>
+                    <li><img class="img-big" src="image/compare/3_suitcase.png"></li>
+                </ul>
+                <ul>
+                    <li><img class="img-big" src="image/compare/3_toytrain.png"></li>
+                </ul>
+                <ul>   
+                    <li><img class="img-big" src="image/compare/3_plant.png"></li>
+                </ul>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
+</section>
   <br>
 
   <!-- citing -->
