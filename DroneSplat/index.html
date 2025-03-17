@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- 设置网页视口的元数据标签 -->
+    <meta name="description" content="DroneSplat: 3D Gaussian Splatting for Robust 3D Reconstruction from In-the-Wild Drone Imagery">
+    <meta name="keywords" content="DroneSplat, DroneSplat: 3D Gaussian Splatting for Robust 3D Reconstruction from In-the-Wild Drone Imagery, 3D Gaussian Splatting, 3D Gaussians, Drone Imagery">
+    <title>DroneSplat</title>
+    
+    <!-- 引入 Bootstrap CSS -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet"> <!-- 表示被链接的文件是一个样式表文件 -->
+    <!-- 引入 Bulma CSS 以支持相关类 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <!-- 引入 Font Awesome 图标库（更新为 6.0 以支持所用的图标） -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- 引入 MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        .large-title {
+            font-size: 2.5rem; /* 根据需要设置字体大小 */
+            font-weight: bold; /* 使标题更加显眼 */
+        }
+        .publication-links {
+            margin-top: 1rem; /* 给链接部分添加顶部间距 */
+        }
+        .link-block {
+            margin-right: 2rem; /* 使按钮之间保持足够的间距 */
+        }
+        .video-section {
+            background-color: #f3f3f3; /* 浅灰色背景 */
+            padding: 1rem 0; /* 上下内边距调整为 1rem */
+        }
+        .video-container {
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;  /* 保证视频之间有足够的间隔 */
+        }
+        .video-container .col-md-4 {
+            padding: 0 10px; /* 可选，给每个视频添加水平间距 */
+        }
+        .video-title {
+            font-size: 2rem; /* 视频标题的字体大小 */
+            font-weight: bold; /* 加粗标题 */
+            margin-top: 2rem; /* 标题的顶部间距 */
+            text-align: center; /* 居中显示标题 */
+        }
+        .video-bottom {
+            font-size: 2rem; /* 视频标题的字体大小 */
+            font-weight: bold; /* 加粗标题 */
+            margin-bottom: 1rem; /* 标题的底部间距，以增加与灰色背景的间隙 */
+            text-align: center; /* 居中显示标题 */
+        }
+        .video-label {
+            text-align: center; /* 居中视频标签 */
+            font-size: 1.5rem; /* 视频上方文本的字体大小 */
+            font-weight: bold; /* 加粗文本 */
+            margin-bottom: 0.7rem; /* 减小文本与视频之间的间距 */
+            margin-top: 0.3rem; /* 减小视频标签与灰色背景上边沿的间距 */
+        }
+        .module-section {
+            margin: 2rem 0; /* 为每个模块添加一些垂直间距 */
+        }
+        .module-title {
+            font-size: 2.5rem; /* 模块标题的字体大小 */
+            font-weight: bold; /* 模块标题加粗 */
+            text-align: center; /* 模块标题居中 */
+            margin-bottom: 1.5rem; /* 模块标题的底部间距 */
+        }
+        .module-content {
+            text-align: center; /* 模块内容居中 */
+            max-width: 1200px; /* 内容的最大宽度 */
+            margin: 0 auto; /* 内容水平居中 */
+        }
+        .abstract-text {
+            font-size: 1.2rem; /* 摘要文本的字体大小 */
+            line-height: 1.5; /* 行距 */
+            text-align: justify; /* 两端对齐 */
+            margin-top: 1rem; /* 增加与标题的间距 */
+            text-indent: 2em; /* 首行缩进 */
+        }
+        .pipe-description {
+            font-size: 1.2rem; /* Pipeline描述的字体大小，比摘要稍小 */
+            line-height: 1.5; /* 行距 */
+            text-align: justify; /* 两端对齐 */
+            margin-top: 1rem; /* 增加与图片的间距 */
+            text-indent: 2em; /* 首行缩进 */
+        }
+        hr.gray-line {
+            border: none;
+            border-top: 1px solid #f5f5f5; /* 灰色的横线 */
+            margin-top: 0rem; /* 增加横线的顶部间距 */
+            margin-bottom: 1.5rem; /* 增加横线的底部间距 */
+        }
+        .dataset-section {
+            margin-top: 50px;
+            max-width: 1600px; /* 内容的最大宽度 */
+            text-align: center;
+        }
+        .dataset-container {
+            display: flex;
+            justify-content: space-between;  /* 保证视频之间有足够的间隔 */
+        }
+        .video-item {
+            flex: 1;
+            max-width: 200px;
+            margin: 10px; /* 每个视频之间的间距 */
+        }
+        .video-item video {
+            width: 100%; /* 视频宽度自适应 */
+            height: auto; /* 保持视频比例 */
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <!-- 内容划分元素 -->
+        <div class="jumbotron text-center mt-0"> <!--jumbotron类可用于创建具有特殊样式的大型容器，text-center类用于居中文本，而mt-0类用于删除顶部的外边距-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="large-title"> DroneSplat: 3D Gaussian Splatting for Robust 3D Reconstruction</h2>
+                        <h2 class="large-title"> from In-the-Wild Drone Imagery </h2>
+                        <hr>
+                        <footer class="author-block" style="font-size: 30px; margin-bottom: 2rem;">
+                            Anonymous Authors
+                        </footer>
+                        <!-- 相关链接部分 -->
+                        <div class="publication-links">
+                            <!-- Dataset 链接部分 -->
+                            <span class="link-block">
+                                <a href="https://drive.google.com/drive/folders/1DWm-foUQC2QBsrr3QC6Tx8bDmWTfgAzu?usp=sharing"
+                                   class="button is-normal is-rounded is-info" 
+                                   aria-label="View Dataset">
+                                    <span class="icon">
+                                        <i class="fas fa-database"></i> <!-- 数据集图标 -->
+                                    </span>
+                                    <span>DroneSplat Dataset</span>
+                                </a>
+                            </span>
+                            <!-- Code 链接部分 -->
+                            <span class="link-block">
+                                <a href="https://github.com/DroneSplat/anonymous_code"
+                                   class="button is-normal is-rounded is-dark" 
+                                   aria-label="View Anonymous Code on GitHub">
+                                    <span class="icon">
+                                        <i class="fab fa-github"></i> <!-- GitHub 图标 -->
+                                    </span>
+                                    <span>Anonymous Code</span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Poster 模块 -->
+    <section class="module-section">
+        <div class="container">
+            <div class="module-title">Poster</div>
+            <hr class="gray-line">
+            <div class="module-content">
+                <img src="images/fig1.jpg" alt="Poster Image" width="100%">
+            </div>
+        </div>
+    </section>
+
+    <!-- Abstract 模块 -->
+    <section class="module-section">
+        <div class="container">
+            <div class="module-title">Abstract</div>
+            <hr class="gray-line">
+            <div class="module-content abstract-text">
+                Drones have become essential tools for reconstructing wild scenes due to their outstanding maneuverability.
+                Recent advances in radiance field methods have achieved remarkable rendering quality, providing a new avenue
+                for 3D reconstruction from drone imagery. However, dynamic distractors in wild environments challenge the
+                static scene assumption in radiance fields, while limited view constraints hinder the accurate capture of
+                underlying scene geometry. To address these challenges, we introduce DroneSplat, a novel framework designed
+                for robust 3D reconstruction from in-the-wild drone imagery. Our method adaptively adjusts masking thresholds
+                by integrating local-global segmentation heuristics with statistical approaches, enabling precise identification
+                and elimination of dynamic distractors in static scenes. We enhance 3D Gaussian Splatting with multi-view stereo
+                predictions and a voxel-guided optimization strategy, supporting high-quality rendering under limited view
+                constraints. For comprehensive evaluation, we provide a drone-captured 3D reconstruction dataset encompassing
+                both dynamic and static scenes. Extensive experiments demonstrate that DroneSplat outperforms both 3DGS and
+                NeRF baselines in handling in-the-wild drone imagery.
+            </div>
+        </div>
+    </section>
+
+    <!-- Framework 模块 -->
+    <section class="module-section">
+        <div class="container">
+            <div class="module-title">Framework</div>
+            <hr class="gray-line">
+            <div class="module-content">
+                <img src="images/pipeline.jpg" alt="Pipeline Image" width="100%">
+                <div class="pipe-description">
+                    Given a few posed drone imagery of a wild scene, our goal is to identify and eliminate dynamic distractors.
+                    We first predict a dense point cloud through a learning-based multi-view stereo method, followed by point
+                    sampling based on confidence and geometric features. The sampled point cloud is used to initialize Gaussian
+                    primitives, which is then optimized using a voxel-guided strategy. At iteration \(t=n\), we calculate the
+                    normalized residual of the rendered image and combine it with the segmentation results to obtain the
+                    object-wise residuals. We adaptively adjust the threshold based on the object-wise residuals and statistical
+                    approaches to obtain local masks. Meanwhile, we mark objects with high residuals as tracking candidates,
+                    deriving the global set at \(t=n\) by combining the global set at \(t=n-1\) with the tracking outcomes at \(t=n\).
+                    After merging the local mask and the global mask retrieved from the global set, we can obtain the final mask
+                    at time \(t=n\). The mask set illustrates the dynamic distractors we predicted.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Datsaet 模块 -->
+    <section class="module-section">
+        <div class="container">
+            <div class="module-title">DroneSplat Dataset</div>
+            <hr class="gray-line">
+            <div class="module-content">
+                <div class="dataset-container">
+                    <!-- 第1行视频 -->
+                    <div class="video-item">
+                        <video src="dataset/1.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/2.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/3.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/4.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/5.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/6.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                </div>
+            </div>
+            <div class="module-content">
+                <div class="dataset-container">
+                    <!-- 第2行视频 -->
+                    <div class="video-item">
+                        <video src="dataset/7.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/8.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/9.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/10.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/11.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/12.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                </div>
+            </div>
+            <div class="module-content">
+                <div class="dataset-container">
+                     <!-- 第3行视频 -->
+                    <div class="video-item">
+                        <video src="dataset/13.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/14.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/15.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/16.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/17.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/18.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                </div>
+            </div>
+            <div class="module-content">
+                <div class="dataset-container">
+                     <!-- 第4行视频 -->
+                    <div class="video-item">
+                        <video src="dataset/19.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/20.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/21.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/22.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/23.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                    <div class="video-item">
+                        <video src="dataset/24.mp4" width="200" height="150" loop autoplay muted></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <!-- Reconstruction Results 模块 -->
+    <section class="module-section">
+        <div class="container">
+            <div class="module-title">Reconstruction Results</div>
+            <hr class="gray-line">
+        </div>
+    </section>
+
+    <!-- 视频标题 -->
+    <div class="video-title">
+        Cultural Center
+    </div>
+    <div class="video-bottom">
+        <!-- Play 按钮 -->
+        <button class="btn btn-success" onclick="playAllVideos_cultural_center()" style="margin-left: 0px; font-weight: bold; width: 80px;">Play</button>
+        <!-- Stop 按钮 -->
+        <button class="btn btn-danger" onclick="stopAllVideos_cultural_center()" style="margin-left: 10px; font-weight: bold; width: 80px;">Stop</button>
+        <!-- Restart 按钮 -->
+        <button class="btn btn-info" onclick="restartAllVideos_cultural_center()" style="margin-left: 10px; font-weight: bold; width: 80px;">Restart</button>
+    </div>
+    <!-- 视频部分 -->
+    <section class="video-section">
+        <div class="container">
+            <!-- 视频行 -->
+            <div class="row video-container">
+                <!-- 第一个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">3DGS</div>
+                    <video id="cultural_center_video1" controls width="100%">
+                        <source src="videos/cultural_center/cultural_center_3dgs.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- 第二个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">GS-W</div>
+                    <video id="cultural_center_video2" controls width="100%">
+                        <source src="videos/cultural_center/cultural_center_gsw.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- 第三个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">DroneSplat</div>
+                    <video id="cultural_center_video3" controls width="100%">
+                        <source src="videos/cultural_center/cultural_center_dronesplat.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 视频标题 -->
+    <div class="video-title">
+        TangTian
+    </div>
+    <div class="video-bottom">
+        <!-- Play 按钮 -->
+        <button class="btn btn-success" onclick="playAllVideos_tangtian()" style="margin-left: 0px; font-weight: bold; width: 80px;">Play</button>
+        <!-- Stop 按钮 -->
+        <button class="btn btn-danger" onclick="stopAllVideos_tangtian()" style="margin-left: 10px; font-weight: bold; width: 80px;">Stop</button>
+        <!-- Restart 按钮 -->
+        <button class="btn btn-info" onclick="restartAllVideos_tangtian()" style="margin-left: 10px; font-weight: bold; width: 80px;">Restart</button>
+    </div>
+    <!-- 视频部分 -->
+    <section class="video-section">
+        <div class="container">
+            <!-- 视频行 -->
+            <div class="row video-container">
+                <!-- 第一个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">3DGS</div>
+                    <video id="tangtian_video1" controls width="100%">
+                        <source src="videos/tangtian/tangtian_3dgs.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- 第二个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">GS-W</div>
+                    <video id="tangtian_video2" controls width="100%">
+                        <source src="videos/tangtian/tangtian_gsw.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- 第三个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">DroneSplat</div>
+                    <video id="tangtian_video3" controls width="100%">
+                        <source src="videos/tangtian/tangtian_dronesplat.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 视频标题 -->
+    <div class="video-title">
+        Pavilion
+    </div>
+    <div class="video-bottom">
+        <!-- Play 按钮 -->
+        <button class="btn btn-success" onclick="playAllVideos_pavilion()" style="margin-left: 0px; font-weight: bold; width: 80px;">Play</button>
+        <!-- Stop 按钮 -->
+        <button class="btn btn-danger" onclick="stopAllVideos_pavilion()" style="margin-left: 10px; font-weight: bold; width: 80px;">Stop</button>
+        <!-- Restart 按钮 -->
+        <button class="btn btn-info" onclick="restartAllVideos_pavilion()" style="margin-left: 10px; font-weight: bold; width: 80px;">Restart</button>
+    </div>
+    <!-- 视频部分 -->
+    <section class="video-section">
+        <div class="container">
+            <!-- 视频行 -->
+            <div class="row video-container">
+                <!-- 第一个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">3DGS</div>
+                    <video id="pavilion_video1" controls width="100%">
+                        <source src="videos/pavilion/pavilion_3dgs.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- 第二个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">GS-W</div>
+                    <video id="pavilion_video2" controls width="100%">
+                        <source src="videos/pavilion/pavilion_gsw.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- 第三个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">DroneSplat</div>
+                    <video id="pavilion_video3" controls width="100%">
+                        <source src="videos/pavilion/pavilion_dronesplat.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 视频标题 -->
+    <div class="video-title">
+        Simingshan
+    </div>
+    <div class="video-bottom">
+        <!-- Play 按钮 -->
+        <button class="btn btn-success" onclick="playAllVideos_simingshan()" style="margin-left: 0px; font-weight: bold; width: 80px;">Play</button>
+        <!-- Stop 按钮 -->
+        <button class="btn btn-danger" onclick="stopAllVideos_simingshan()" style="margin-left: 10px; font-weight: bold; width: 80px;">Stop</button>
+        <!-- Restart 按钮 -->
+        <button class="btn btn-info" onclick="restartAllVideos_simingshan()" style="margin-left: 10px; font-weight: bold; width: 80px;">Restart</button>
+    </div>
+    <!-- 视频部分 -->
+    <section class="video-section">
+        <div class="container">
+            <!-- 视频行 -->
+            <div class="row video-container">
+                <!-- 第一个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">3DGS</div>
+                    <video id="simingshan_video1" controls width="100%">
+                        <source src="videos/simingshan/simingshan_3dgs.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- 第二个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">GS-W</div>
+                    <video id="simingshan_video2" controls width="100%">
+                        <source src="videos/simingshan/simingshan_gsw.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- 第三个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">DroneSplat</div>
+                    <video id="simingshan_video3" controls width="100%">
+                        <source src="videos/simingshan/simingshan_dronesplat.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 视频标题 -->
+    <div class="video-title">
+        Intersection
+    </div>
+    <div class="video-bottom">
+        <!-- Play 按钮 -->
+        <button class="btn btn-success" onclick="playAllVideos_intersection()" style="margin-left: 0px; font-weight: bold; width: 80px;">Play</button>
+        <!-- Stop 按钮 -->
+        <button class="btn btn-danger" onclick="stopAllVideos_intersection()" style="margin-left: 10px; font-weight: bold; width: 80px;">Stop</button>
+        <!-- Restart 按钮 -->
+        <button class="btn btn-info" onclick="restartAllVideos_intersection()" style="margin-left: 10px; font-weight: bold; width: 80px;">Restart</button>
+    </div>
+    <!-- 视频部分 -->
+    <section class="video-section">
+        <div class="container">
+            <!-- 视频行 -->
+            <div class="row video-container">
+                <!-- 第一个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">3DGS</div>
+                    <video id="intersection_video1" controls width="100%">
+                        <source src="videos/intersection/intersection_3dgs.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- 第二个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">GS-W</div>
+                    <video id="intersection_video2" controls width="100%">
+                        <source src="videos/intersection/intersection_gsw.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- 第三个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">DroneSplat</div>
+                    <video id="intersection_video3" controls width="100%">
+                        <source src="videos/intersection/intersection_dronesplat.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- 视频标题 -->
+    <div class="video-title">
+        Sculpture
+    </div>
+    <div class="video-bottom">
+        <!-- Play 按钮 -->
+        <button class="btn btn-success" onclick="playAllVideos_sculpture()" style="margin-left: 0px; font-weight: bold; width: 80px;">Play</button>
+        <!-- Stop 按钮 -->
+        <button class="btn btn-danger" onclick="stopAllVideos_sculpture()" style="margin-left: 10px; font-weight: bold; width: 80px;">Stop</button>
+        <!-- Restart 按钮 -->
+        <button class="btn btn-info" onclick="restartAllVideos_sculpture()" style="margin-left: 10px; font-weight: bold; width: 80px;">Restart</button>
+    </div>
+    <!-- 视频部分 -->
+    <section class="video-section">
+        <div class="container">
+            <!-- 视频行 -->
+            <div class="row video-container">
+                <!-- 第一个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">3DGS</div>
+                    <video id="sculpture_video1" controls width="100%">
+                        <source src="videos/sculpture/sculpture_3dgs.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- 第二个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">GS-W</div>
+                    <video id="sculpture_video2" controls width="100%">
+                        <source src="videos/sculpture/sculpture_gsw.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- 第三个视频及其标题 -->
+                <div class="col-md-4">
+                    <div class="video-label">DroneSplat</div>
+                    <video id="sculpture_video3" controls width="100%">
+                        <source src="videos/sculpture/sculpture_dronesplat.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 引入 Bootstrap JavaScript (可选) -->
+    <script>
+        // Simingshan
+        // 播放所有视频
+        function playAllVideos_simingshan() {
+            var simingshan_video1 = document.getElementById("simingshan_video1");
+            var simingshan_video2 = document.getElementById("simingshan_video2");
+            var simingshan_video3 = document.getElementById("simingshan_video3");
+    
+            // 同时播放所有视频
+            simingshan_video1.play();
+            simingshan_video2.play();
+            simingshan_video3.play();
+        }
+    
+        // 停止所有视频，并保持在当前播放位置
+        function stopAllVideos_simingshan() {
+            var simingshan_video1 = document.getElementById("simingshan_video1");
+            var simingshan_video2 = document.getElementById("simingshan_video2");
+            var simingshan_video3 = document.getElementById("simingshan_video3");
+    
+            // 暂停所有视频
+            simingshan_video1.pause();
+            simingshan_video2.pause();
+            simingshan_video3.pause();
+        }
+
+        // 重置所有视频并从头播放
+        function restartAllVideos_simingshan() {
+            var simingshan_video1 = document.getElementById("simingshan_video1");
+            var simingshan_video2 = document.getElementById("simingshan_video2");
+            var simingshan_video3 = document.getElementById("simingshan_video3");
+
+            // 重置播放位置为 0（从头开始）
+            simingshan_video1.currentTime = 0;
+            simingshan_video2.currentTime = 0;
+            simingshan_video3.currentTime = 0;
+
+            // 播放所有视频
+            simingshan_video1.play();
+            simingshan_video2.play();
+            simingshan_video3.play();
+        }
+        
+        // Pavilion
+        // 播放所有视频
+        function playAllVideos_pavilion() {
+            var pavilion_video1 = document.getElementById("pavilion_video1");
+            var pavilion_video2 = document.getElementById("pavilion_video2");
+            var pavilion_video3 = document.getElementById("pavilion_video3");
+    
+            // 同时播放所有视频
+            pavilion_video1.play();
+            pavilion_video2.play();
+            pavilion_video3.play();
+        }
+    
+        // 停止所有视频，并保持在当前播放位置
+        function stopAllVideos_pavilion() {
+            var pavilion_video1 = document.getElementById("pavilion_video1");
+            var pavilion_video2 = document.getElementById("pavilion_video2");
+            var pavilion_video3 = document.getElementById("pavilion_video3");
+    
+            // 暂停所有视频
+            pavilion_video1.pause();
+            pavilion_video2.pause();
+            pavilion_video3.pause();
+        }
+
+        // 重置所有视频并从头播放
+        function restartAllVideos_pavilion() {
+            var pavilion_video1 = document.getElementById("pavilion_video1");
+            var pavilion_video2 = document.getElementById("pavilion_video2");
+            var pavilion_video3 = document.getElementById("pavilion_video3");
+
+            // 重置播放位置为 0（从头开始）
+            pavilion_video1.currentTime = 0;
+            pavilion_video2.currentTime = 0;
+            pavilion_video3.currentTime = 0;
+
+            // 播放所有视频
+            pavilion_video1.play();
+            pavilion_video2.play();
+            pavilion_video3.play();
+        }
+
+        // TangTian
+        // 播放所有视频
+        function playAllVideos_tangtian() {
+            var tangtian_video1 = document.getElementById("tangtian_video1");
+            var tangtian_video2 = document.getElementById("tangtian_video2");
+            var tangtian_video3 = document.getElementById("tangtian_video3");
+    
+            // 同时播放所有视频
+            tangtian_video1.play();
+            tangtian_video2.play();
+            tangtian_video3.play();
+        }
+    
+        // 停止所有视频，并保持在当前播放位置
+        function stopAllVideos_tangtian() {
+            var tangtian_video1 = document.getElementById("tangtian_video1");
+            var tangtian_video2 = document.getElementById("tangtian_video2");
+            var tangtian_video3 = document.getElementById("tangtian_video3");
+    
+            // 暂停所有视频
+            tangtian_video1.pause();
+            tangtian_video2.pause();
+            tangtian_video3.pause();
+        }
+
+        // 重置所有视频并从头播放
+        function restartAllVideos_tangtian() {
+            var tangtian_video1 = document.getElementById("tangtian_video1");
+            var tangtian_video2 = document.getElementById("tangtian_video2");
+            var tangtian_video3 = document.getElementById("tangtian_video3");
+
+            // 重置播放位置为 0（从头开始）
+            tangtian_video1.currentTime = 0;
+            tangtian_video2.currentTime = 0;
+            tangtian_video3.currentTime = 0;
+
+            // 播放所有视频
+            tangtian_video1.play();
+            tangtian_video2.play();
+            tangtian_video3.play();
+        }
+
+        // Cultural Center
+        // 播放所有视频
+        function playAllVideos_cultural_center() {
+            var cultural_center_video1 = document.getElementById("cultural_center_video1");
+            var cultural_center_video2 = document.getElementById("cultural_center_video2");
+            var cultural_center_video3 = document.getElementById("cultural_center_video3");
+    
+            // 同时播放所有视频
+            cultural_center_video1.play();
+            cultural_center_video2.play();
+            cultural_center_video3.play();
+        }
+    
+        // 停止所有视频，并保持在当前播放位置
+        function stopAllVideos_cultural_center() {
+            var cultural_center_video1 = document.getElementById("cultural_center_video1");
+            var cultural_center_video2 = document.getElementById("cultural_center_video2");
+            var cultural_center_video3 = document.getElementById("cultural_center_video3");
+    
+            // 暂停所有视频
+            cultural_center_video1.pause();
+            cultural_center_video2.pause();
+            cultural_center_video3.pause();
+        }
+
+        // 重置所有视频并从头播放
+        function restartAllVideos_cultural_center() {
+            var cultural_center_video1 = document.getElementById("cultural_center_video1");
+            var cultural_center_video2 = document.getElementById("cultural_center_video2");
+            var cultural_center_video3 = document.getElementById("cultural_center_video3");
+
+            // 重置播放位置为 0（从头开始）
+            cultural_center_video1.currentTime = 0;
+            cultural_center_video2.currentTime = 0;
+            cultural_center_video3.currentTime = 0;
+
+            // 播放所有视频
+            cultural_center_video1.play();
+            cultural_center_video2.play();
+            cultural_center_video3.play();
+        }
+
+        // Intersection
+        // 播放所有视频
+        function playAllVideos_intersection() {
+            var intersection_video1 = document.getElementById("intersection_video1");
+            var intersection_video2 = document.getElementById("intersection_video2");
+            var intersection_video3 = document.getElementById("intersection_video3");
+    
+            // 同时播放所有视频
+            intersection_video1.play();
+            intersection_video2.play();
+            intersection_video3.play();
+        }
+    
+        // 停止所有视频，并保持在当前播放位置
+        function stopAllVideos_intersection() {
+            var intersection_video1 = document.getElementById("intersection_video1");
+            var intersection_video2 = document.getElementById("intersection_video2");
+            var intersection_video3 = document.getElementById("intersection_video3");
+    
+            // 暂停所有视频
+            intersection_video1.pause();
+            intersection_video2.pause();
+            intersection_video3.pause();
+        }
+
+        // 重置所有视频并从头播放
+        function restartAllVideos_intersection() {
+            var intersection_video1 = document.getElementById("intersection_video1");
+            var intersection_video2 = document.getElementById("intersection_video2");
+            var intersection_video3 = document.getElementById("intersection_video3");
+
+            // 重置播放位置为 0（从头开始）
+            intersection_video1.currentTime = 0;
+            intersection_video2.currentTime = 0;
+            intersection_video3.currentTime = 0;
+
+            // 播放所有视频
+            intersection_video1.play();
+            intersection_video2.play();
+            intersection_video3.play();
+        }
+
+        // Sculpture
+        // 播放所有视频
+        function playAllVideos_sculpture() {
+            var sculpture_video1 = document.getElementById("sculpture_video1");
+            var sculpture_video2 = document.getElementById("sculpture_video2");
+            var sculpture_video3 = document.getElementById("sculpture_video3");
+    
+            // 同时播放所有视频
+            sculpture_video1.play();
+            sculpture_video2.play();
+            sculpture_video3.play();
+        }
+    
+        // 停止所有视频，并保持在当前播放位置
+        function stopAllVideos_sculpture() {
+            var sculpture_video1 = document.getElementById("sculpture_video1");
+            var sculpture_video2 = document.getElementById("sculpture_video2");
+            var sculpture_video3 = document.getElementById("sculpture_video3");
+    
+            // 暂停所有视频
+            sculpture_video1.pause();
+            sculpture_video2.pause();
+            sculpture_video3.pause();
+        }
+
+        // 重置所有视频并从头播放
+        function restartAllVideos_sculpture() {
+            var sculpture_video1 = document.getElementById("sculpture_video1");
+            var sculpture_video2 = document.getElementById("sculpture_video2");
+            var sculpture_video3 = document.getElementById("sculpture_video3");
+
+            // 重置播放位置为 0（从头开始）
+            sculpture_video1.currentTime = 0;
+            sculpture_video2.currentTime = 0;
+            sculpture_video3.currentTime = 0;
+
+            // 播放所有视频
+            sculpture_video1.play();
+            sculpture_video2.play();
+            sculpture_video3.play();
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
