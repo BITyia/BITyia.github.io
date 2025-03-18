@@ -112,6 +112,23 @@
             width: 100%; /* 视频宽度自适应 */
             height: auto; /* 保持视频比例 */
         }
+        .author {
+            position: relative;
+            display: inline-block;
+            margin-right: 20px;
+        }
+        .superscript {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 0.6em;
+            color: red; /* 你可以根据需要更改颜色 */
+        }
+        .affiliation {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: gray; /* 你可以根据需要更改颜色 */
+        }
     </style>
 </head>
 
@@ -126,10 +143,50 @@
                         <h2 class="large-title"> from In-the-Wild Drone Imagery </h2>
                         <hr>
                         <footer class="author-block" style="font-size: 30px; margin-bottom: 2rem;">
-                            Anonymous Authors
+                            <div class="author">
+                                Jiadong Tang
+                                <span class="superscript">1</span>
+                            </div>
+                            <div class="author">
+                                Yu Gao
+                                <span class="superscript">1</span>
+                            </div>
+                            <div class="author">
+                                Dianyi Yang
+                                <span class="superscript">1</span>
+                            </div>
+                            <div class="author">
+                                Liqi Yan
+                                <span class="superscript">2</span>
+                            </div>
+                            <div class="author">
+                                Yufeng Yue
+                                <span class="superscript">1</span>
+                            </div>
+                            <div class="author">
+                                Yi Yang
+                                <span class="superscript">1</span>
+                            </div>
                         </footer>
+                        <div class="affiliation">
+                            1: Beijing Institute of Technology
+                        </div>
+                        <div class="affiliation">
+                            2: Hangzhou Dianzi University
+                        </div>
                         <!-- 相关链接部分 -->
                         <div class="publication-links">
+                            
+                            <!--arXiv-->
+                            <span class="link-block">
+                                <a href=" "
+                                   class="external-link button is-normal is-rounded is-dark">
+                                  <span class="icon">
+                                      <i class="ai ai-arxiv"></i>
+                                  </span>
+                                  <span>arXiv</span>
+                                </a>
+                              </span>
                             <!-- Dataset 链接部分 -->
                             <span class="link-block">
                                 <a href="https://drive.google.com/drive/folders/1DWm-foUQC2QBsrr3QC6Tx8bDmWTfgAzu?usp=sharing"
@@ -138,7 +195,7 @@
                                     <span class="icon">
                                         <i class="fas fa-database"></i> <!-- 数据集图标 -->
                                     </span>
-                                    <span>DroneSplat Dataset</span>
+                                    <span>Dataset</span>
                                 </a>
                             </span>
                             <!-- Code 链接部分 -->
@@ -149,7 +206,7 @@
                                     <span class="icon">
                                         <i class="fab fa-github"></i> <!-- GitHub 图标 -->
                                     </span>
-                                    <span>Anonymous Code</span>
+                                    <span>Code</span>
                                 </a>
                             </span>
                         </div>
