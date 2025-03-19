@@ -8,6 +8,12 @@
     <meta name="keywords" content="DroneSplat, DroneSplat: 3D Gaussian Splatting for Robust 3D Reconstruction from In-the-Wild Drone Imagery, 3D Gaussian Splatting, 3D Gaussians, Drone Imagery">
     <title>DroneSplat</title>
     
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
     <!-- 引入 Bootstrap CSS -->
     <link href="css/bootstrap-4.4.1.css" rel="stylesheet"> <!-- 表示被链接的文件是一个样式表文件 -->
     <!-- 引入 Bulma CSS 以支持相关类 -->
@@ -126,7 +132,7 @@
             color: rgb(0, 0, 0);
         }
         .affiliation {
-            margin-top: 10px;
+            margin-top: 4px;
             font-size: 1.2em; /* 调整机构名字的字体大小 */
             color: rgb(0, 0, 0);
             display: inline-block; /* 使机构在同一行显示 */
@@ -135,89 +141,96 @@
     </style>
 </head>
 
-<body>
-    <section>
-        <!-- 内容划分元素 -->
-        <div class="jumbotron text-center mt-0"> <!--jumbotron类可用于创建具有特殊样式的大型容器，text-center类用于居中文本，而mt-0类用于删除顶部的外边距-->
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="large-title"> DroneSplat: 3D Gaussian Splatting for Robust 3D Reconstruction</h2>
-                        <h2 class="large-title"> from In-the-Wild Drone Imagery </h2>
-                        <hr>
-                        <footer class="author-block" style="font-size: 20px; margin-bottom: 2rem;">
-                            <div class="author">
-                                Jiadong Tang
-                                <span class="superscript">1</span>
-                            </div>
-                            <div class="author">
-                                Yu Gao
-                                <span class="superscript">1</span>
-                            </div>
-                            <div class="author">
-                                Dianyi Yang
-                                <span class="superscript">1</span>
-                            </div>
-                            <div class="author">
-                                Liqi Yan
-                                <span class="superscript">2</span>
-                            </div>
-                            <div class="author">
-                                Yufeng Yue
-                                <span class="superscript">1</span>
-                            </div>
-                            <div class="author">
-                                Yi Yang
-                                <span class="superscript">1</span>
-                            </div>
-                        </footer>
-                        <div class="affiliation">
-                            1: Beijing Institute of Technology
-                        </div>
-                        <div class="affiliation">
-                            2: Hangzhou Dianzi University
-                        </div>
-                        <!-- 相关链接部分 -->
-                        <div class="publication-links">
-                            
-                            <!--arXiv-->
-                            <span class="link-block">
-                                <a href=" "
-                                   class="external-link button is-normal is-rounded is-dark">
-                                  <span class="icon">
-                                      <i class="fas fa-file-alt"></i> <!-- 确保使用正确的Font Awesome图标类 -->
-                                  </span>
-                                  <span>arXiv</span>
-                                </a>
-                              </span>
-                            <!-- Dataset 链接部分 -->
-                            <span class="link-block">
-                                <a href="https://drive.google.com/drive/folders/1DWm-foUQC2QBsrr3QC6Tx8bDmWTfgAzu?usp=sharing"
-                                   class="button is-normal is-rounded is-info" 
-                                   aria-label="View Dataset">
-                                    <span class="icon">
-                                        <i class="fas fa-database"></i>
-                                    </span>
-                                    <span>Dataset</span>
-                                </a>
-                            </span>
-                            <!-- Code 链接部分 -->
-                            <span class="link-block">
-                                <a href="https://github.com/DroneSplat/anonymous_code"
-                                   class="button is-normal is-rounded is-dark" 
-                                   aria-label="View Anonymous Code on GitHub">
-                                    <span class="icon">
-                                        <i class="fab fa-github"></i>
-                                    </span>
-                                    <span>Code</span>
-                                </a>
-                            </span>
-                        </div>
-                    </div>
+<body>    
+
+    <section class="hero">
+        <div class="hero-body">
+          <div class="container is-max-desktop">
+            <div class="columns is-centered">
+              <div class="column has-text-centered">
+                <h1 class="title is-1 publication-title" style="margin-bottom: 0"><strong>DroneSplat: 3D Gaussian Splatting for Robust 3D Reconstruction</strong></h1>
+                <h2 class="title is-2 publication-title" style="margin-top: 0; margin-bottom: 0">from In-the-Wild Drone Imagery</h2>
+                <br>
+                <h2 class="title is-4" style="margin-top: 0; margin-bottom: 0">CVPR 2025</h2>
+                <br>
+                <div class="is-size-5 publication-authors">
+                  <span class="author-block">
+                    <a href="https://bityia.github.io/DroneSplat/">Jiadong Tang</a><sup>1</sup></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <span class="author-block">
+                    <a href="https://bityia.github.io/DroneSplat/">Yu Gao</a><sup>1</sup></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <span class="author-block">
+                    <a href="https://bityia.github.io/DroneSplat/">Dianyi Yang</a><sup>1</sup>
+                  </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <span class="author-block">
+                    <a href="https://bityia.github.io/DroneSplat/">Liqi Yan</a><sup>2</sup>
+                  </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <span class="author-block">
+                    <a href="https://bityia.github.io/DroneSplat/">Yufeng Yue</a><sup>1</sup>
+                  </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <span class="author-block">
+                    <a href="https://bityia.github.io/DroneSplat/">Yi Yang</a><sup>1</sup>
+                  </span>
                 </div>
+      
+                <div class="is-size-5 publication-authors">
+                  <span class="author-block"><sup>1</sup>Beijing Institute of Technology</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <span class="author-block"><sup>2</sup>Hangzhou Dianzi University</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+      
+                <div class="column has-text-centered">
+                  <div class="publication-links">
+                    <!-- PDF Link. -->
+                    <!-- <span class="link-block">
+                      <a href="https://drive.google.com/file/d/1Q7KgGbynzcIEyFJV1I17HgrYz6xrOwRJ/view?usp=sharing"
+                         class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span> -->
+      
+                    <span class="link-block">
+                      <a href=" "
+                         class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                            <i class="ai ai-arxiv"></i>
+                        </span>
+                        <span>arXiv</span>
+                      </a>
+                    </span>
+                
+                    <!-- Code Link. -->
+                    <span class="link-block">
+                      <a href="https://github.com/DroneSplat/anonymous_code"
+                         class="external-link button is-normal is-rounded is-dark disabled">
+                        <span class="icon">
+                            <i class="fab fa-github"></i>
+                        </span>
+                        <span>Code</span>
+                        </a>
+                    </span>
+      
+                    <!-- Dataset Link. -->
+                    <span class="link-block">
+                      <a href="https://drive.google.com/drive/folders/1DWm-foUQC2QBsrr3QC6Tx8bDmWTfgAzu?usp=sharing"
+                         class="external-link button is-normal is-rounded is-dark disabled">
+                        <span class="icon">
+                            <i class="fab fa-dribbble"></i>
+                        </span>
+                        <span>Dataset</span>
+                        </a>
+                    </span>
+        
+      
+                  </div>
+      
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
+      </section>
 
     <!-- Poster 模块 -->
     <section class="module-section">
