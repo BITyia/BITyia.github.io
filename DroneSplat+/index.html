@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
     <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- 设置网页视口的元数据标签 -->
-    <meta name="description" content="DroneSplat: 3D Gaussian Splatting for Robust 3D Reconstruction from In-the-Wild Drone Imagery">
-    <meta name="keywords" content="DroneSplat, DroneSplat: 3D Gaussian Splatting for Robust 3D Reconstruction from In-the-Wild Drone Imagery, 3D Gaussian Splatting, 3D Gaussians, Drone Imagery">
-    <title>DroneSplat</title>
+    <meta name="description" content="DroneSplat+: Semantics-Enhanced 3D Gaussian Splatting for Robust 3D Reconstruction from In-the-Wild Drone Imagery">
+    <meta name="keywords" content="DroneSplat, DroneSplat+: Semantics-Enhanced 3D Gaussian Splatting for Robust 3D Reconstruction from In-the-Wild Drone Imagery, 3D Gaussian Splatting, 3D Gaussians, Drone Imagery">
+    <title>DroneSplat+</title>
     
     <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
     <link rel="stylesheet" href="./static/css/bulma.min.css">
@@ -172,11 +172,8 @@
           <div class="container is-max-desktop">
             <div class="columns is-centered">
               <div class="column has-text-centered">
-                <div class="paper-title title-line1">DroneSplat: 3D Gaussian Splatting for Robust 3D Reconstruction</div>
-                <div class="paper-title title-line2">from In-the-Wild Drone Imagery</div>
-                <br>
-                <h2 class="title is-4" style="margin-top: 0; margin-bottom: 0">CVPR 2025 (Highlight)</h2>
-                <br>
+                <div class="paper-title title-line1">DroneSplat+: Semantics-Enhanced 3D Gaussian Splatting for</div>
+                <div class="paper-title title-line2">Robust 3D Reconstruction from In-the-Wild Drone Imagery</div>
                 <div class="is-size-5 publication-authors">
                   <span class="author-block">
                     <strong>Jiadong Tang</strong></a><sup>1</sup></span>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -186,7 +183,10 @@
                     <strong>Dianyi Yang</strong></a><sup>1</sup>
                   </span>&nbsp;&nbsp;&nbsp;&nbsp;
                   <span class="author-block">
-                    <strong>Liqi Yan</strong></a><sup>2</sup>
+                    <strong>Haolin Yu</strong></a><sup>1</sup>
+                  </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <span class="author-block">
+                    <strong>Tianji Jiang</strong></a><sup>1</sup>
                   </span>&nbsp;&nbsp;&nbsp;&nbsp;
                   <span class="author-block">
                     <strong>Yufeng Yue</strong></a><sup>1</sup>
@@ -198,7 +198,6 @@
       
                 <div class="is-size-5 publication-authors">
                   <span class="author-block"><sup>1</sup>Beijing Institute of Technology</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <span class="author-block"><sup>2</sup>Hangzhou Dianzi University</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
       
                 <div class="column has-text-centered">
@@ -252,7 +251,7 @@
             <!-- <div class="module-title">Poster</div>
             <hr class="gray-line"> -->
             <div class="module-content">
-                <img src="images/fig1.jpg" alt="Poster Image" width="100%">
+                <img src="images/img1.jpg" alt="Poster Image" width="100%">
             </div>
         </div>
     </section>
@@ -263,18 +262,13 @@
             <div class="module-title">Abstract</div>
             <hr class="gray-line">
             <div class="module-content abstract-text">
-                Drones have become essential tools for reconstructing wild scenes due to their outstanding maneuverability.
-                Recent advances in radiance field methods have achieved remarkable rendering quality, providing a new avenue
-                for 3D reconstruction from drone imagery. However, dynamic distractors in wild environments challenge the
-                static scene assumption in radiance fields, while limited view constraints hinder the accurate capture of
-                underlying scene geometry. To address these challenges, we introduce DroneSplat, a novel framework designed
-                for robust 3D reconstruction from in-the-wild drone imagery. Our method adaptively adjusts masking thresholds
-                by integrating local-global segmentation heuristics with statistical approaches, enabling precise identification
-                and elimination of dynamic distractors in static scenes. We enhance 3D Gaussian Splatting with multi-view stereo
-                predictions and a voxel-guided optimization strategy, supporting high-quality rendering under limited view
-                constraints. For comprehensive evaluation, we provide a drone-captured 3D reconstruction dataset encompassing
-                both dynamic and static scenes. Extensive experiments demonstrate that DroneSplat outperforms both 3DGS and
-                NeRF baselines in handling in-the-wild drone imagery.
+                Drones have become indispensable for reconstructing in-the-wild scenes due to their remarkable agility. Recent advances in radiance-field representations have achieved photorealistic rendering, opening new avenues for 3D reconstruction from drone imagery.
+                However, limited view constraints hinder reliable geometric recovery, while dynamic distractors in the wild violate the multi-view consistency in radiance fields.
+                To address these challenges, we propose DroneSplat+, a novel semantics-enhanced framework for robust 3D reconstruction from in-the-wild drone imagery.
+                DroneSplat+ couples multi-view stereo predictions with segmentation priors to impose semantic constraints that steer Gaussian optimization, enabling accurate geometry recovery under limited-view conditions.
+                To suppress dynamics, DroneSplat+ introduces a dual-elimination strategy that combines adaptive local-global masking and label-based localization to precisely identify and remove dynamic distractors from static scenes.
+                We also provide a drone-captured 3D reconstruction benchmark dataset encompassing both dynamic and static scenes for comprehensive evaluation.
+                Experimental results show that our method outperforms both 3DGS and NeRF baselines in reconstructing in-the-wild drone imagery.
             </div>
         </div>
     </section>
@@ -285,18 +279,12 @@
             <div class="module-title">Framework</div>
             <hr class="gray-line">
             <div class="module-content">
-                <img src="images/pipeline.jpg" alt="Pipeline Image" width="100%">
+                <img src="images/pipeline4.jpg" alt="Pipeline Image" width="100%">
                 <div class="pipe-description">
-                    Given a few posed drone imagery of a wild scene, our goal is to identify and eliminate dynamic distractors.
-                    We first predict a dense point cloud through a learning-based multi-view stereo method, followed by point
-                    sampling based on confidence and geometric features. The sampled point cloud is used to initialize Gaussian
-                    primitives, which is then optimized using a voxel-guided strategy. At iteration \(t=n\), we calculate the
-                    normalized residual of the rendered image and combine it with the segmentation results to obtain the
-                    object-wise residuals. We adaptively adjust the threshold based on the object-wise residuals and statistical
-                    approaches to obtain local masks. Meanwhile, we mark objects with high residuals as tracking candidates,
-                    deriving the global set at \(t=n\) by combining the global set at \(t=n-1\) with the tracking outcomes at \(t=n\).
-                    After merging the local mask and the global mask retrieved from the global set, we can obtain the final mask
-                    at time \(t=n\). The mask set illustrates the dynamic distractors we predicted.
+                    Given a few drone images of a wild scene, we reconstruct the scene with accurate geometry while eliminating dynamic distractors. 
+                    We estimate a dense point cloud with multi-view stereo and annotate each point with a unique semantic label.
+                    Then we perform label unification based on feature correspondences. We initialize 3DGS from the point cloud with unified labels, and regularize Gaussians using an instance-aware grid and a segmentation-guided consistency optimization.
+                    In parallel, we compute normalized residuals and aggregate residuals within each mask to obtain instance-wise residuals. Based on per-iteration residual statistics, we adaptively set a local threshold to predict local masks. We also track high residual instances to produce global masks. The mask set delineates predicted dynamic distractors. We query the semantic labels of instances in this set and prune Gaussians who include these labels, ensuring robust distractor removal.
                 </div>
             </div>
         </div>
@@ -925,21 +913,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <section class="section" id="BibTeX">
-        <div class="container is-max-desktop content">
-          <h2 class="title">BibTeX</h2>
-          <pre><code>@misc{tang2025dronesplat3dgaussiansplatting,
-            title={DroneSplat: 3D Gaussian Splatting for Robust 3D Reconstruction from In-the-Wild Drone Imagery}, 
-            author={Jiadong Tang and Yu Gao and Dianyi Yang and Liqi Yan and Yufeng Yue and Yi Yang},
-            year={2025},
-            eprint={2503.16964},
-            archivePrefix={arXiv},
-            primaryClass={cs.CV},
-            url={https://arxiv.org/abs/2503.16964}, 
-      }</code></pre>
-        </div>
-      </section>
 
     <footer class="footer">
         <div class="container">
