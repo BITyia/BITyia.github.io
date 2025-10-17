@@ -385,10 +385,154 @@
     
     
 
-    <!-- Reconstruction Results 模块 -->
+    <!-- Limited-view Reconstruction Results 模块 -->
     <section class="module-section">
         <div class="container">
-            <div class="module-title">Reconstruction Results</div>
+            <div class="module-title">Limited-view Reconstruction Results</div>
+            <hr class="gray-line">
+        </div>
+    </section>
+
+    <!-- 视频标题 -->
+    <div class="video-title">
+        Road
+    </div>
+    <div class="video-bottom">
+        <!-- Play 按钮 -->
+        <button class="btn btn-success" onclick="playAllVideos_road()" style="margin-left: 0px; font-weight: bold; width: 80px;">Play</button>
+        <!-- Stop 按钮 -->
+        <button class="btn btn-danger" onclick="stopAllVideos_road()" style="margin-left: 10px; font-weight: bold; width: 80px;">Stop</button>
+        <!-- Restart 按钮 -->
+        <button class="btn btn-info" onclick="restartAllVideos_road()" style="margin-left: 10px; font-weight: bold; width: 80px;">Restart</button>
+    </div>
+    <!-- 视频部分 -->
+    <section class="video-section">
+        <div class="container">
+            <!-- 视频行 -->
+            <div class="row video-container">
+                <div class="col-md-3">
+                    <div class="video-label">FSGS</div>
+                    <video id="road_video1" controls width="100%">
+                        <source src="videos/road/road_fsgs.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="col-md-3">
+                    <div class="video-label">EAP-GS</div>
+                    <video id="road_video2" controls width="100%">
+                        <source src="videos/road/road_eapgs.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="col-md-3">
+                    <div class="video-label">DropGaussian</div>
+                    <video id="road_video3" controls width="100%">
+                        <source src="videos/road/road_dropgaussian.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="col-md-3">
+                    <div class="video-label">DroneSplat+</div>
+                    <video id="road_video4" controls width="100%">
+                        <source src="videos/road/road_dronesplat.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 视频标题 -->
+    <div class="video-title">
+        Plaza
+    </div>
+    <div class="video-bottom">
+        <!-- Play 按钮 -->
+        <button class="btn btn-success" onclick="playAllVideos_plaza()" style="margin-left: 0px; font-weight: bold; width: 80px;">Play</button>
+        <!-- Stop 按钮 -->
+        <button class="btn btn-danger" onclick="stopAllVideos_plaza()" style="margin-left: 10px; font-weight: bold; width: 80px;">Stop</button>
+        <!-- Restart 按钮 -->
+        <button class="btn btn-info" onclick="restartAllVideos_plaza()" style="margin-left: 10px; font-weight: bold; width: 80px;">Restart</button>
+    </div>
+    <!-- 视频部分 -->
+    <section class="video-section">
+        <div class="container">
+            <!-- 视频行 -->
+            <div class="row video-container">
+                <div class="col-md-3">
+                    <div class="video-label">FSGS</div>
+                    <video id="plaza_video1" controls width="100%">
+                        <source src="videos/plaza/plaza_fsgs.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="col-md-3">
+                    <div class="video-label">EAP-GS</div>
+                    <video id="plaza_video2" controls width="100%">
+                        <source src="videos/plaza/plaza_eapgs.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="col-md-3">
+                    <div class="video-label">DropGaussian</div>
+                    <video id="plaza_video3" controls width="100%">
+                        <source src="videos/plaza/plaza_dropgaussian.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="col-md-3">
+                    <div class="video-label">DroneSplat+</div>
+                    <video id="plaza_video4" controls width="100%">
+                        <source src="videos/plaza/plaza_dronesplat.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 视频标题 -->
+    <div class="video-title">
+        Garden
+    </div>
+    <div class="video-bottom">
+        <!-- Play 按钮 -->
+        <button class="btn btn-success" onclick="playAllVideos_garden()" style="margin-left: 0px; font-weight: bold; width: 80px;">Play</button>
+        <!-- Stop 按钮 -->
+        <button class="btn btn-danger" onclick="stopAllVideos_garden()" style="margin-left: 10px; font-weight: bold; width: 80px;">Stop</button>
+        <!-- Restart 按钮 -->
+        <button class="btn btn-info" onclick="restartAllVideos_garden()" style="margin-left: 10px; font-weight: bold; width: 80px;">Restart</button>
+    </div>
+    <!-- 视频部分 -->
+    <section class="video-section">
+        <div class="container">
+            <!-- 视频行 -->
+            <div class="row video-container">
+                <div class="col-md-3">
+                    <div class="video-label">FSGS</div>
+                    <video id="garden_video1" controls width="100%">
+                        <source src="videos/garden/garden_fsgs.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="col-md-3">
+                    <div class="video-label">EAP-GS</div>
+                    <video id="garden_video2" controls width="100%">
+                        <source src="videos/garden/garden_eapgs.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="col-md-3">
+                    <div class="video-label">DropGaussian</div>
+                    <video id="garden_video3" controls width="100%">
+                        <source src="videos/garden/garden_dropgaussian.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="col-md-3">
+                    <div class="video-label">DroneSplat+</div>
+                    <video id="garden_video4" controls width="100%">
+                        <source src="videos/garden/garden_dronesplat.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Distractor Elimination Results 模块 -->
+    <section class="module-section">
+        <div class="container">
+            <div class="module-title">Distractor Elimination Results</div>
             <hr class="gray-line">
         </div>
     </section>
